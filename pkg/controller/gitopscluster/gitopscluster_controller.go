@@ -34,6 +34,7 @@ import (
 	"k8s.io/klog"
 	spokeclusterv1 "open-cluster-management.io/api/cluster/v1"
 	clusterv1beta1 "open-cluster-management.io/api/cluster/v1beta1"
+	policyv1 "open-cluster-management.io/governance-policy-propagator/api/v1"
 	gitopsclusterV1beta1 "open-cluster-management.io/multicloud-integrations/pkg/apis/apps/v1beta1"
 	"open-cluster-management.io/multicloud-integrations/pkg/utils"
 
@@ -256,6 +257,9 @@ func (r *ReconcileGitOpsCluster) Reconcile(ctx context.Context, request reconcil
 
 		return reconcile.Result{Requeue: true, RequeueAfter: time.Duration(returnRequeueInterval) * time.Minute}, returnErr
 	}
+
+	policy := policyv1.Policy{}
+	klog.Info(policy)
 
 	return reconcile.Result{}, nil
 }
